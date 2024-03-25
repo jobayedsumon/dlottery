@@ -25,7 +25,8 @@
         "textmagic/sdk": "dev-master",
         "twilio/sdk": "^6.23",
         "authorizenet/authorizenet": ">=1.9.3",
-        "vonage/client": "^2.4"
+        "vonage/client": "^2.4",
+      "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",
