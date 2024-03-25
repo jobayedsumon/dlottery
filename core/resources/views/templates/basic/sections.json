@@ -1,0 +1,246 @@
+{
+    "banner": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Banner Section",
+        "content": {
+            "images": {
+                "background_image": {
+                    "size": "1920x983"
+                }
+            },
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        }
+    },
+    "breadcrumb": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Breadcrumb Section",
+        "content": {
+            "images": {
+                "background_image": {
+                    "size": "1920x983"
+                }
+            }
+        }
+    },
+    "feature": {
+        "builder": true,
+        "name": "Feature Section",
+        "content": {
+            "heading": "text"
+        },
+        "element": {
+            "title": "text",
+            "description": "textarea",
+            "icon": "icon",
+            "modal": true
+        }
+    },
+    "counter": {
+        "builder": true,
+        "name": "Counter Section",
+        "element": {
+            "icon": "icon",
+            "title": "text",
+            "number": "text",
+            "modal": true
+        }
+    },
+    "latest_games": {
+        "builder": true,
+        "name": "Latest Games",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "lottery": {
+        "builder": true,
+        "name": "Lottery Section",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "how_it_work": {
+        "builder": true,
+        "name": "How It Work",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "title": "text",
+            "description": "textarea",
+            "modal": true
+        }
+    },
+    "about": {
+        "builder": true,
+        "name": "About Us",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "636x358"
+                }
+            },
+            "heading": "text",
+            "description": "textarea"
+        }
+    },
+    "statistics": {
+        "builder": true,
+        "name": "Statistics",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "cta": {
+        "builder": true,
+        "name": "Call to Action",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "1920x390"
+                }
+            },
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        }
+    },
+    "faq": {
+        "builder": true,
+        "name": "FAQ Section",
+        "content": {
+            "images": {
+                "image": {
+                    "size": "364x500"
+                }
+            },
+            "heading": "text"
+        },
+        "element": {
+            "question": "text",
+            "answer": "textarea-nic",
+            "modal": false
+        }
+    },
+    "recent_winners": {
+        "builder": true,
+        "name": "Recent Winners",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "testimonial": {
+        "builder": true,
+        "name": "Testimonial Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "75x75"
+                }
+            },
+            "name": "text",
+            "designation": "text",
+            "rating": "text",
+            "review": "textarea",
+            "modal": true
+        }
+    },
+    "payments": {
+        "builder": true,
+        "name": "Payment Gateways",
+        "content": {
+            "heading": "text",
+            "subheading": "text",
+            "button_name": "text",
+            "button_url": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "64x50"
+                }
+            },
+            "modal": true
+        }
+    },
+    "policy_pages": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Policy Pages",
+        "element": {
+            "title": "text",
+            "details": "textarea-nic",
+            "modal": false
+        }
+    },
+    "blog": {
+        "builder": true,
+        "name": "Blog Section",
+        "content": {
+            "heading": "text",
+            "subheading": "text"
+        },
+        "element": {
+            "images": {
+                "image": {
+                    "size": "728x465",
+                    "thumb": "120x80"
+                }
+            },
+            "title": "text",
+            "seo_description": "textarea",
+            "description_nic": "textarea-nic",
+            "modal": false
+        }
+    },
+    "subscribe": {
+        "builder": true,
+        "name": "Subscribe Section",
+        "content": {
+            "heading": "text"
+        }
+    },
+    "social_icon": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Social Icons",
+        "element": {
+            "title": "text",
+            "social_icon": "icon",
+            "url": "text",
+            "modal": false
+        }
+    },
+    "contact_us": {
+        "builder": true,
+        "no_selection": true,
+        "name": "Contact Us",
+        "content": {
+            "title": "text",
+            "short_details": "text",
+            "address": "text",
+            "email_address": "text",
+            "contact_number": "text"
+        }
+    },
+    "kyc_instruction": {
+        "builder": true,
+        "no_selection": true,
+        "name": "KYC Instructions",
+        "content": {
+            "verification_instruction": "textarea",
+            "pending_instruction": "textarea"
+        }
+    }
+}
