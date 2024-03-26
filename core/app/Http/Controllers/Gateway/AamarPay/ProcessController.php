@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class ProcessController extends Controller
 {
     /*
-     * Payeer Gateway
+     * AamarPay Gateway
      */
 
     public static function process($deposit)
@@ -46,8 +46,7 @@ class ProcessController extends Controller
         $val['fail_url'] = route('ipn.'.$deposit->gateway->alias);
         $val['cancel_url'] = route(gatewayRedirectUrl());
 
-        $url = 'https://sandbox.aamarpay.com'; // use for sandbox testing
-//        $url = 'https://secure.aamarpay.com/'; // use for live
+        $url = env('APP_ENV') == 'live' ? 'https://secure.aamarpay.com' : 'https://sandbox.aamarpay.com';
 
         $fields_string = http_build_query($val);
 

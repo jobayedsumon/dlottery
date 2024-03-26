@@ -28,3 +28,4 @@ Route::post('authorize', 'Authorize\ProcessController@ipn')->name('Authorize');
 Route::get('nmi', 'NMI\ProcessController@ipn')->name('NMI');
 Route::any('two-checkout', 'TwoCheckout\ProcessController@ipn')->name('TwoCheckout');
 Route::any('aamarpay', 'AamarPay\ProcessController@ipn')->name('AamarPay');
+Route::any('bkash', 'Bkash\ProcessController@ipn')->name('Bkash');
