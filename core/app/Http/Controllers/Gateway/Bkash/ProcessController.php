@@ -99,8 +99,8 @@ class ProcessController extends Controller
         curl_close($url);
         $obj = json_decode($resultdata);
 
-        if (isset($obj) && $obj->statusCode == '0000' && $request->statusMessage == "Successful") {
-            $deposit = Deposit::where('trx', $request->merchantInvoiceNumber)->orderBy('id', 'DESC')->first();
+        if (isset($obj) && $obj->statusCode == '0000' && $obj->statusMessage == "Successful" && $obj->transactionStatus == "Completed") {
+            $deposit = Deposit::where('trx', $obj->merchantInvoiceNumber)->orderBy('id', 'DESC')->first();
             if ($deposit->status == Status::PAYMENT_INITIATE) {
                 PaymentController::userDataUpdate($deposit);
                 $notify[] = ['success', 'Transaction is successful'];
