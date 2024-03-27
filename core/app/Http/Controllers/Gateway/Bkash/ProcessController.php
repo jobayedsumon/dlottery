@@ -24,7 +24,7 @@ class ProcessController extends Controller
         $response = self::getToken($base_url, $bkashAcc);
         $auth = $response['id_token'];
         session()->put('token', $auth);
-        $callbackURL = route('ipn.'.$deposit->gateway->alias, ['deposit_id' => $deposit->id]);
+        $callbackURL = route('ipn.'.$deposit->gateway->alias, ['deposit_id' => $deposit->id, 'token' => $auth]);
 
         $val = array(
             'mode' => '0011',
@@ -99,15 +99,9 @@ class ProcessController extends Controller
         curl_close($url);
         $obj = json_decode($resultdata);
 
-        if (isset($obj) && $obj->statusCode == '0000') {
-
+        if (isset($obj) && $obj->statusCode == '0000' && $request->statusMessage == "Successful") {
             $deposit = Deposit::where('trx', $request->merchantInvoiceNumber)->orderBy('id', 'DESC')->first();
-
-            if ($request->amount == getAmount($deposit->final_amo)
-                && $request->currency == $deposit->method_currency
-                && $request->statusCode == "0000"
-                && $request->statusMessage == "Successful"
-                && $deposit->status == Status::PAYMENT_INITIATE) {
+            if ($deposit->status == Status::PAYMENT_INITIATE) {
                 PaymentController::userDataUpdate($deposit);
                 $notify[] = ['success', 'Transaction is successful'];
                 return to_route(gatewayRedirectUrl(true))->withNotify($notify);
