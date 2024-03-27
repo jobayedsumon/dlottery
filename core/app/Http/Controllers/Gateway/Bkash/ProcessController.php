@@ -24,7 +24,7 @@ class ProcessController extends Controller
         $response = self::getToken($base_url, $bkashAcc);
         $auth = $response['id_token'];
         session()->put('token', $auth);
-        $callbackURL = route('ipn.'.$deposit->gateway->alias, ['deposit_id' => $deposit->id, 'token' => $auth]);
+        $callbackURL = route('ipn.'.$deposit->gateway->alias, ['deposit_id' => $deposit->id]);
 
         $val = array(
             'mode' => '0011',
@@ -42,7 +42,7 @@ class ProcessController extends Controller
         $header = array(
             'Content-Type:application/json',
             'Authorization:' . $auth,
-            'X-APP-Key:' . $bkashAcc->app_key
+            'X-APP-Key:' . (env('APP_ENV') == 'live' ? $bkashAcc->app_key : '4f6o0cjiki2rfm34kfdadl1eqq')
         );
 
         curl_setopt($url, CURLOPT_HTTPHEADER, $header);
@@ -86,7 +86,7 @@ class ProcessController extends Controller
         $header = array(
             'Content-Type:application/json',
             'Authorization:' . $auth,
-            'X-APP-Key:' . $bkashAcc->app_key
+            'X-APP-Key:' . (env('APP_ENV') == 'live' ? $bkashAcc->app_key : '4f6o0cjiki2rfm34kfdadl1eqq')
         );
 
         curl_setopt($url, CURLOPT_HTTPHEADER, $header);
@@ -124,16 +124,16 @@ class ProcessController extends Controller
     private static function getToken($base_url, $bkashAcc)
     {
         $post_token = array(
-            'app_key' => $bkashAcc->app_key,
-            'app_secret' => $bkashAcc->app_secret
+            'app_key' => env('APP_ENV') == 'live' ? $bkashAcc->app_key : '4f6o0cjiki2rfm34kfdadl1eqq',
+            'app_secret' => env('APP_ENV') == 'live' ? $bkashAcc->app_secret : '2is7hdktrekvrbljjh44ll3d9l1dtjo4pasmjvs5vl5qr3fug4b'
         );
 
         $url = curl_init($base_url . '/tokenized/checkout/token/grant');
         $post_token_json = json_encode($post_token);
         $header = array(
             'Content-Type:application/json',
-            'username:' . $bkashAcc->username,
-            'password:' . $bkashAcc->password
+            'username:' . (env('APP_ENV') == 'live' ? $bkashAcc->username : 'sandboxTokenizedUser02'),
+            'password:' . (env('APP_ENV') == 'live' ? $bkashAcc->password : 'sandboxTokenizedUser02@12345')
         );
 
         curl_setopt($url, CURLOPT_HTTPHEADER, $header);

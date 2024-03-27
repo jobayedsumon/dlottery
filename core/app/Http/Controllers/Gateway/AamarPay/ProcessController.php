@@ -21,8 +21,8 @@ class ProcessController extends Controller
         $address = $user->address;
         $aamarpayAcc = json_decode($deposit->gatewayCurrency()->gateway_parameter);
 
-        $val['store_id'] = trim($aamarpayAcc->store_id);
-        $val['signature_key'] = trim($aamarpayAcc->signature_key);
+        $val['store_id'] = env('APP_ENV') == 'live' ? trim($aamarpayAcc->store_id) : 'aamarpaytest';
+        $val['signature_key'] = env('APP_ENV') == 'live' ? trim($aamarpayAcc->signature_key) : 'dbb74894e82415a2f7ff0ec3a97e4183';
         $val['currency'] = "$deposit->method_currency";
         $val['tran_id'] = "$deposit->trx";
         $val['amount'] = round($deposit->final_amo,2);
