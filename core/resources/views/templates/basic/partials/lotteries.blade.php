@@ -6,7 +6,7 @@
                 <th>@lang('Start Date')</th>
                 <th>@lang('Draw Date')</th>
                 <th>@lang('Price')</th>
-                <th>@lang('Sold')</th>
+{{--                <th>@lang('Sold')</th>--}}
                 <th>@lang('Status')</th>
                 <th>@lang('Action')</th>
             </tr>
@@ -23,12 +23,12 @@
                     <td>{{ @showDateTime($phase->start_date, 'Y-m-d') }}</td>
                     <td>{{ @showDateTime($phase->draw_date, 'Y-m-d') }}</td>
                     <td>{{ showAmount($phase->lottery->price) }} {{ $general->cur_text }}</td>
-                    <td>
-                        <div class="progress lottery--progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ ($phase->sold / $phase->quantity) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($phase->sold / $phase->quantity) * 100 }}%"></div>
-                        </div>
-                        <span class="fs--14px">{{ getAmount(($phase->sold / $phase->quantity) * 100) }}%</span>
-                    </td>
+{{--                    <td>--}}
+{{--                        <div class="progress lottery--progress">--}}
+{{--                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ ($phase->sold / $phase->quantity) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($phase->sold / $phase->quantity) * 100 }}%"></div>--}}
+{{--                        </div>--}}
+{{--                        <span class="fs--14px">{{ getAmount(($phase->sold / $phase->quantity) * 100) }}%</span>--}}
+{{--                    </td>--}}
                     <td>
                         @php  echo $phase->DrawBadge; @endphp
                     </td>

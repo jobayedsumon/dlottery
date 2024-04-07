@@ -27,7 +27,7 @@
                                 <div class="lottery-details-body">
                                     <div class="top-part">
                                         <div class="left">
-                                            <h4>@lang('Available Ticket'): {{ __($phase->available) }}</h4>
+{{--                                            <h4>@lang('Available Ticket'): {{ __($phase->available) }}</h4>--}}
                                             <h4 class="mt-2">@lang('Price'):
                                                 {{ __($general->cur_sym) }}{{ __(showAmount($phase->lottery->price)) }}</h4>
                                         </div>
@@ -91,7 +91,7 @@
                             <div class="lottery-details-body">
                                 <div class="top-part">
                                     <div class="left">
-                                        <h4>@lang('Available Ticket'): {{ __($phase->available) }}</h4>
+{{--                                        <h4>@lang('Available Ticket'): {{ __($phase->available) }}</h4>--}}
                                         <h4 class="mt-2">@lang('Price'):
                                             {{ __($general->cur_sym) }}{{ __(showAmount($phase->lottery->price)) }}</h4>
                                     </div>
