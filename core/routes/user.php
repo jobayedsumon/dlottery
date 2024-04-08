@@ -26,6 +26,11 @@ Route::namespace('User\Auth')->name('user.')->group(function () {
         Route::post('password/reset', 'reset')->name('password.update');
         Route::get('password/reset/{token}', 'showResetForm')->name('password.reset');
     });
+
+    Route::controller('GoogleLoginController')->group(function () {
+        Route::get('/google/redirect', 'redirectToGoogle')->name('google.redirect');
+        Route::get('/google/callback', 'handleGoogleCallback')->name('google.callback');
+    });
 });
 
 Route::middleware('auth')->name('user.')->group(function () {

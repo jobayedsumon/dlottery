@@ -6,13 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "ext-curl": "*",
+        "authorizenet/authorizenet": ">=1.9.3",
         "coingate/coingate-php": "^3.0",
         "ezyang/htmlpurifier": "^4.13",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.5",
-        "laramin/utility": "dev-main",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
+        "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.4",
         "mailjet/mailjet-apiv3-php": "^1.4",
@@ -24,9 +26,7 @@
         "stripe/stripe-php": "^7.72",
         "textmagic/sdk": "dev-master",
         "twilio/sdk": "^6.23",
-        "authorizenet/authorizenet": ">=1.9.3",
-        "vonage/client": "^2.4",
-      "ext-curl": "*"
+        "vonage/client": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

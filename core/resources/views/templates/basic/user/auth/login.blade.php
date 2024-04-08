@@ -46,6 +46,7 @@
                             </div>
 
                             <button class="btn btn--base w-100" id="recaptcha" type="submit">@lang('Login')</button>
+                            <a href="{{ route('user.google.redirect') }}" class="btn btn-primary"> Login with Google </a>
                             <p class="mt-3 text-center"><span class="text-white">@lang('New to') {{ $general->site_name }}
                                     ?</span> <a class="text--base" href="{{ route('user.register') }}">@lang('Register')</a></p>
                         </form>

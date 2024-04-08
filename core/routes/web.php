@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/clear', function () {
-    \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+    Artisan::call('optimize:clear');
 });
 
 //Cron Route
