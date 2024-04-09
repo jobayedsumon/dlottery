@@ -3,4 +3,3 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/dlotonli/public_html/
     - /bin/cp -R * $DEPLOYPATH
-    - /bin/composer dump-autoload --optimize --no-dev
