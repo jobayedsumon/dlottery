@@ -5,14 +5,13 @@ deployment:
     - /bin/cp ./* $DEPLOYPATH/
     - /bin/cp -r ./assets $DEPLOYPATH/assets
     - /bin/cp ./core/* $DEPLOYPATH/core/
-    - /bin/cp -r ./app $DEPLOYPATH/app
-    - /bin/cp -r ./bootstrap $DEPLOYPATH/bootstrap
-    - /bin/cp -r ./config $DEPLOYPATH/config
-    - /bin/cp -r ./database $DEPLOYPATH/database
-    - /bin/cp -r ./lang $DEPLOYPATH/lang
-    - /bin/cp -r ./resources $DEPLOYPATH/resources
-    - /bin/cp -r ./routes $DEPLOYPATH/routes
-    - /bin/cp -r ./tests $DEPLOYPATH/tests
-    - /bin/rm -rf $DEPLOYPATH/vendor
-    - /bin/composer update --no-dev --optimize-autoloader
-    - /bin/php artisan optimize:clear
+    - /bin/cp -r ./core/app $DEPLOYPATH/core/app
+    - /bin/cp -r ./core/bootstrap $DEPLOYPATH/core/bootstrap
+    - /bin/cp -r ./core/config $DEPLOYPATH/core/config
+    - /bin/cp -r ./core/database $DEPLOYPATH/core/database
+    - /bin/cp -r ./core/lang $DEPLOYPATH/core/lang
+    - /bin/cp -r ./core/resources $DEPLOYPATH/core/resources
+    - /bin/cp -r ./core/routes $DEPLOYPATH/core/routes
+    - /bin/cp -r ./core/tests $DEPLOYPATH/core/tests
+#    - /bin/composer install --no-dev --optimize-autoloader
+ #   - /bin/php artisan optimize:clear
