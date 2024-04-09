@@ -13,5 +13,6 @@ deployment:
     - /bin/cp -r ./resources $DEPLOYPATH/resources
     - /bin/cp -r ./routes $DEPLOYPATH/routes
     - /bin/cp -r ./tests $DEPLOYPATH/tests
+    - /bin/rm -rf $DEPLOYPATH/vendor
     - /bin/composer update --no-dev --optimize-autoloader
     - /bin/php artisan optimize:clear
