@@ -113,7 +113,12 @@
                                 @endif
 
                                 <div class="col-12">
-                                    <button class="btn btn--base w-100 mt-3" id="recaptcha" type="submit">@lang('Register')</button>
+                                    <button class="btn btn--base w-100 my-3" id="recaptcha" type="submit">@lang('Register')</button>
+
+                                    <a href="{{ route('user.google.redirect') }}" class="w-100 text-center">
+                                        <img src="{{ getImage('assets/templates/basic/images/google_login_button.svg') }}" alt="Continue with Google">
+                                    </a>
+
                                     <p class="mt-3 text-center"><span class="text-white">@lang('Have an account') ?</span> <a
                                             class="text--base" href="{{ route('user.login') }}">@lang('Login')</a>
                                     </p>

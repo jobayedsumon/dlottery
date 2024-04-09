@@ -13,6 +13,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class RegisterController extends Controller
 {
@@ -87,6 +90,11 @@ class RegisterController extends Controller
 
     }
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ValidationException
+     */
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
@@ -111,92 +119,12 @@ class RegisterController extends Controller
             return back()->withNotify($notify)->withInput();
         }
 
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($user = createUser($request->all())));
 
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
             ?: redirect($this->redirectPath());
-    }
-
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        $general = gs();
-
-        $referBy = session()->get('reference');
-        if ($referBy) {
-            $referUser = User::where('username', $referBy)->first();
-        } else {
-            $referUser = null;
-        }
-        //User Create
-        $user = new User();
-        $user->email = strtolower(trim($data['email']));
-        $user->password = Hash::make($data['password']);
-        $user->username = trim($data['username']);
-        $user->ref_by = $referUser ? $referUser->id : 0;
-        $user->country_code = $data['country_code'];
-        $user->mobile = $data['mobile_code'].$data['mobile'];
-        $user->address = [
-            'address' => '',
-            'state' => '',
-            'zip' => '',
-            'country' => isset($data['country']) ? $data['country'] : null,
-            'city' => ''
-        ];
-        $user->kv = $general->kv ? Status::NO : Status::YES;
-        $user->ev = $general->ev ? Status::NO : Status::YES;
-        $user->sv = $general->sv ? Status::NO : Status::YES;
-        $user->ts = 0;
-        $user->tv = 1;
-        $user->save();
-
-
-        $adminNotification = new AdminNotification();
-        $adminNotification->user_id = $user->id;
-        $adminNotification->title = 'New member registered';
-        $adminNotification->click_url = urlPath('admin.users.detail',$user->id);
-        $adminNotification->save();
-
-
-        //Login Log Create
-        $ip = getRealIP();
-        $exist = UserLogin::where('user_ip',$ip)->first();
-        $userLogin = new UserLogin();
-
-        //Check exist or not
-        if ($exist) {
-            $userLogin->longitude =  $exist->longitude;
-            $userLogin->latitude =  $exist->latitude;
-            $userLogin->city =  $exist->city;
-            $userLogin->country_code = $exist->country_code;
-            $userLogin->country =  $exist->country;
-        }else{
-            $info = json_decode(json_encode(getIpInfo()), true);
-            $userLogin->longitude =  @implode(',',$info['long']);
-            $userLogin->latitude =  @implode(',',$info['lat']);
-            $userLogin->city =  @implode(',',$info['city']);
-            $userLogin->country_code = @implode(',',$info['code']);
-            $userLogin->country =  @implode(',', $info['country']);
-        }
-
-        $userAgent = osBrowser();
-        $userLogin->user_id = $user->id;
-        $userLogin->user_ip =  $ip;
-
-        $userLogin->browser = @$userAgent['browser'];
-        $userLogin->os = @$userAgent['os_platform'];
-        $userLogin->save();
-
-
-        return $user;
     }
 
     public function checkUser(Request $request){

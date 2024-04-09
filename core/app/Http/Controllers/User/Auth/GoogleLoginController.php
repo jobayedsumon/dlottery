@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers\User\Auth;
 
+use App\Constants\Status;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class GoogleLoginController extends Controller
 {
-    use AuthenticatesUsers;
+    use RegistersUsers;
 
     public function redirectToGoogle()
     {
@@ -19,18 +24,29 @@ class GoogleLoginController extends Controller
     }
 
 
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function handleGoogleCallback()
     {
         $googleUser = Socialite::driver('google')->stateless()->user();
-        dd($googleUser);
         $user = User::where('email', $googleUser->email)->first();
         if(!$user)
         {
-            $user = User::create(['name' => $googleUser->name, 'email' => $googleUser->email, 'password' => Hash::make(rand(100000,999999))]);
+            event(new Registered($user = createUser([
+                'username' => $googleUser->id,
+                'email' => $googleUser->email,
+                'password' => $googleUser->token,
+            ])));
+
+            $user->ev = Status::VERIFIED;
+            $user->save();
         }
 
-        Auth::login($user);
+        $this->guard()->login($user);
 
-        return $this->loginResponse($user);
+        return to_route('user.home')
+            ?: redirect($this->redirectPath());
     }
 }
